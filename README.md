@@ -4,7 +4,7 @@
 
 Сверстанный сайт по [Фигме](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-GitHub [Pages](https://dreusus.github.io/russian-travel/)
+GitHub [Pages](https://dreusus.github.io/mesto/)
 
 Использовались  знания html,css,навыки адаптива, пройденных накануне,а именно :
 * Флексбокс-верстка
