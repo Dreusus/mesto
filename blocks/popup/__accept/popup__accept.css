@@ -11,9 +11,14 @@
   line-height: 21.78px;
   background-color: black;
   color: white;
-  transition: 0.1s;
+  transition: 0.4s;
 }
 
 .popup__accept:hover {
   opacity: .6;
+}
+
+@media screen and  (max-width:700px) {
+.popup__accept {
+  max-width: 238px;
 }

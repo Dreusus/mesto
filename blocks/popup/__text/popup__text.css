@@ -7,5 +7,11 @@
   padding: 0;
   margin:0 auto 30px;
   border: none;
-  border-bottom: 1px solid rgb(119, 112, 112);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+@media screen and  (max-width:700px) {
+.popup__text {
+  max-width: 238px;
+}
 }

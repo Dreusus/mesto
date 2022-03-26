@@ -10,7 +10,8 @@ width: 150px;
 height: 50px;
 margin:auto 0 auto auto;
 padding:0;
-transition: .1s;
+transition: .4s;
+cursor: pointer;
 }
 
 .profile__button:hover {
