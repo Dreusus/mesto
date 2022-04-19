@@ -94,7 +94,7 @@ const addCard = (evt) => {
   evt.preventDefault();
   const newCard = createMesto(inputTitle.value,inputImage.value)
   container.prepend(newCard)
-  openPushPopup()
+  closePopup(popupAddCard)
 
 }
 
@@ -137,7 +137,7 @@ const openProfilePopup = () => {
 
 const openPushPopup = () => {
   openPopup(popupAddCard)
- /* closePopupAddCard.addEventListener('click', openPushPopup) */
+
 }
 
 
