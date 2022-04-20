@@ -31,7 +31,7 @@ const buttonEdit = document.querySelector('.profile__edit')
 const popupEdit = document.querySelector('#profile-popup');
 const profileTitle= document.querySelector('.profile__title')
 const profileSubtitle= document.querySelector('.profile__subtitle')
-const closePopupEdit = document.querySelector('.popup__close')
+const popupEditClose = document.querySelector('.popup__close')
 
 const inputName = document.querySelector('#profile__name')
 const inputJob = document.querySelector('#profile__about')
@@ -40,7 +40,7 @@ const inputJob = document.querySelector('#profile__about')
 //Попап добавление карточки
 const popupAddCard = document.querySelector('#addCard-popup')
 const buttonPlus = document.querySelector('.profile__button')
-const closePopupAddCard = document.querySelector('#closePush')
+const popupAddCardClose = document.querySelector('#closePush')
 const inputTitle = document.querySelector('#popup__mesto')
 const inputImage = document.querySelector('#popup__img')
 
@@ -49,7 +49,7 @@ const inputImage = document.querySelector('#popup__img')
 const popupPhoto = document.querySelector('.popup_photo')
 const imagePopupPhoto = document.querySelector('.popup__image')
 const subscriptionPopupPhoto = document.querySelector('.popup__subscription-photo')
-const closePopupPhoto = document.querySelector('#closePhoto')
+const popupPhotoClose = document.querySelector('#closePhoto')
 
 
 //Формы
@@ -77,6 +77,7 @@ const createMesto = (cardName, link) => {
   })
   image.addEventListener('click', () => {
     imagePopupPhoto.src = link
+    imagePopupPhoto.alt = cardName
     subscriptionPopupPhoto.textContent = cardName
     openPopupPhoto()
 
@@ -95,6 +96,8 @@ const addCard = (evt) => {
   const newCard = createMesto(inputTitle.value,inputImage.value)
   container.prepend(newCard)
   closePopup(popupAddCard)
+  inputTitle.value = ''
+  inputImage.value = ''
 
 }
 
@@ -125,10 +128,9 @@ const openPopupPhoto = () => {
 
 // Редактирование профиля
 const openProfilePopup = () => {
-  openPopup(popupEdit)
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
-
+  openPopup(popupEdit)
  }
 
 
@@ -155,15 +157,15 @@ const handleProfileFormSubmit =  (evt) => {
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 buttonEdit.addEventListener('click', openProfilePopup)
 
-closePopupEdit.addEventListener('click', () =>{
+popupEditClose.addEventListener('click', () =>{
   closePopup(popupEdit)
 })
 
-closePopupAddCard.addEventListener('click', () =>{
+popupAddCardClose.addEventListener('click', () =>{
   closePopup(popupAddCard)
 })
 
-closePopupPhoto.addEventListener('click', () =>{
+popupPhotoClose.addEventListener('click', () =>{
   closePopup(popupPhoto)
 })
 
