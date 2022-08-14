@@ -1,13 +1,13 @@
 //Cоощение ошибки
 const showInputError = (formElement, inputElement,  errorMessage) => {
-  const errorElement =  formElement.querySelector(`.${inputElement.id}_error`)
+  const errorElement =  formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.add('popup__text_type_error')
   errorElement.textContent = errorMessage;
 }
 
 //Отсутсвие ошибки
 const hideInputError = (formElement, inputElement) => {
-  const errorElement =  formElement.querySelector(`.${inputElement.id}_error`)
+  const errorElement =  formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove('popup__text_type_error')
   errorElement.textContent = ' ';
 }

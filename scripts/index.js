@@ -34,15 +34,15 @@ const profileTitle= document.querySelector('.profile__title')
 const profileSubtitle= document.querySelector('.profile__subtitle')
 const popupEditClose = document.querySelector('.popup__close')
 
-const inputName = document.querySelector('#profile__name')
-const inputJob = document.querySelector('#profile__about')
+const inputName = document.querySelector('#profile-name')
+const inputJob = document.querySelector('#profile-about')
 
 //Попап добавление карточки
 const popupAddCard = document.querySelector('#addCard-popup')
 const buttonPlus = document.querySelector('.profile__button')
 const popupAddCardClose = document.querySelector('#closePush')
-const inputTitle = document.querySelector('#popup__mesto')
-const inputImage = document.querySelector('#popup__img')
+const inputTitle = document.querySelector('#popup-mesto')
+const inputImage = document.querySelector('#popup-img')
 
 //Попап картинка
 const popupPhoto = document.querySelector('.popup_photo')
