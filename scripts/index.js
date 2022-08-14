@@ -1,3 +1,4 @@
+
 const initialCards = [
   {
     name: 'Прометей',
@@ -9,7 +10,7 @@ const initialCards = [
   },
   {
     name: 'Церковь',
-    link: 'https://грузоперевозки-тюмень-межгород.рф/wp-content/uploads/2020/04/Надым.jpg'
+    link: 'https://content.foto.my.mail.ru/mail/sasin62/1329/h-1351.jpg'
   },
   {
     name: 'Кольцо',
@@ -36,7 +37,6 @@ const popupEditClose = document.querySelector('.popup__close')
 const inputName = document.querySelector('#profile__name')
 const inputJob = document.querySelector('#profile__about')
 
-
 //Попап добавление карточки
 const popupAddCard = document.querySelector('#addCard-popup')
 const buttonPlus = document.querySelector('.profile__button')
@@ -44,24 +44,22 @@ const popupAddCardClose = document.querySelector('#closePush')
 const inputTitle = document.querySelector('#popup__mesto')
 const inputImage = document.querySelector('#popup__img')
 
-
 //Попап картинка
 const popupPhoto = document.querySelector('.popup_photo')
 const imagePopupPhoto = document.querySelector('.popup__image')
 const subscriptionPopupPhoto = document.querySelector('.popup__subscription-photo')
 const popupPhotoClose = document.querySelector('#closePhoto')
 
-
 //Формы
 const formEditProfile = document.querySelector('#popEdit')
 const formAddCard = document.querySelector('#popAdd')
 
-
+//Темплейт
 const template = document.querySelector('#template').content
 const container = document.querySelector('.elements')
 
 
-
+//Создание карточки
 const createMesto = (cardName, link) => {
   const card = template.querySelector('.element').cloneNode(true)
   const image = card.querySelector('.element__image')
@@ -90,7 +88,6 @@ const renderMesto = (newCard) => {
   container.prepend(newCard);
 }
 
-
 const addCard = (evt) => {
   evt.preventDefault();
   const newCard = createMesto(inputTitle.value,inputImage.value)
@@ -112,13 +109,32 @@ initialCards.forEach(item => {
 formAddCard.addEventListener('submit', addCard)
 
 
-
+//Открытие попапа
 const openPopup = (popup) => {
   popup.classList.add('popup_opened')
+  popup.addEventListener('click', closeOverlay)
+  document.addEventListener('keyup', closeEscape)
 }
 
+//Закрытие попапа
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened')
+  popup.removeEventListener('click', closeOverlay)
+  document.removeEventListener('keyup', closeEscape)
+}
+
+//Закрытие через Escape
+const closeEscape = (event) => {
+  if (event.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened')
+    closePopup(popup)
+  }
+}
+//Закрытие через оверлей
+const closeOverlay = (event) => {
+  if(event.target === event.currentTarget) {
+    closePopup(event.target)
+  }
 }
 
 const openPopupPhoto = () => {
@@ -134,9 +150,7 @@ const openProfilePopup = () => {
  }
 
 
-
 // Добавление карточки
-
 const openPushPopup = () => {
   openPopup(popupAddCard)
 
@@ -168,6 +182,13 @@ popupAddCardClose.addEventListener('click', () =>{
 popupPhotoClose.addEventListener('click', () =>{
   closePopup(popupPhoto)
 })
+
+
+/* window.addEventListener('click', evt => {
+  console.log(evt.target)
+  console.log(evt.currentTarget)
+})
+ */
 
 
 
