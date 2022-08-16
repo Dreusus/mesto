@@ -1,12 +1,3 @@
-
-const config = {
-  formElement: '.popup__form',
-  inputElement: '.popup__text',
-  buttonElement: '.popup__accept',
-  inactiveButtonClass: 'popup__accept_invalid',
-  inputErrorClass: 'popup__text_type_error',
-}
-
 const showInputError = (formElement, inputElement,  errorMessage, config) => {
   const errorElement =  formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.add(config.inputErrorClass)

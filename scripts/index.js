@@ -58,6 +58,18 @@ const formAddCard = document.querySelector('#popAdd')
 const template = document.querySelector('#template').content
 const container = document.querySelector('.elements')
 
+//
+
+const config = {
+  formElement: '.popup__form',
+  inputElement: '.popup__text',
+  buttonElement: '.popup__accept',
+  inactiveButtonClass: 'popup__accept_invalid',
+  inputErrorClass: 'popup__text_type_error',
+}
+const inputList = Array.from(formAddCard.querySelectorAll(config.inputElement));
+//При сабмите формы кнопка сабмита уже есть в объекте evt.Это evt.submitter. Поэтому ее можно не искать, а сразу использовать в коде обработчика сабмита  - добавить 
+const buttonElement = formAddCard.querySelector(config.buttonElement)
 
 //Создание карточки
 const createMesto = (cardName, link) => {
@@ -150,7 +162,6 @@ const openProfilePopup = () => {
   openPopup(popupEdit)
  }
 
-
 // Добавление карточки
 const openPushPopup = () => {
   openPopup(popupAddCard)
@@ -161,8 +172,6 @@ const openPushPopup = () => {
 
 buttonPlus.addEventListener('click', function () {
   formAddCard.reset()
-  const inputList = Array.from(formAddCard.querySelectorAll(config.inputElement));
-  const buttonElement = formAddCard.querySelector(config.buttonElement)
   toggleButtonState(inputList, buttonElement, config);
   openPopup(popupAddCard)
 });
@@ -179,12 +188,9 @@ const handleProfileFormSubmit =  (evt) => {
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 
 buttonEdit.addEventListener('click', () => {
-  const inputList = Array.from(formAddCard.querySelectorAll(config.inputElement));
-  const buttonElement = formAddCard.querySelector(config.buttonElement)
   toggleButtonState(inputList, buttonElement, config);
-
   openProfilePopup()
-  let eventInput = new Event('input');
+  const eventInput = new Event('input');
   inputName.dispatchEvent(eventInput);
   inputJob.dispatchEvent(eventInput);
 })
