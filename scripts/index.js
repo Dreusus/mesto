@@ -92,12 +92,11 @@ const addCard = (evt) => {
   evt.preventDefault();
   const newCard = createMesto(inputTitle.value,inputImage.value)
   container.prepend(newCard)
+  evt.target.reset()
   closePopup(popupAddCard)
-  inputTitle.value = ''
-  inputImage.value = ''
+
 
 }
-
 
 initialCards.forEach(item => {
   const initialCard = createMesto(item.name, item.link)
@@ -109,11 +108,13 @@ initialCards.forEach(item => {
 formAddCard.addEventListener('submit', addCard)
 
 
+
 //Открытие попапа
 const openPopup = (popup) => {
   popup.classList.add('popup_opened')
   popup.addEventListener('click', closeOverlay)
   document.addEventListener('keyup', closeEscape)
+
 }
 
 //Закрытие попапа
@@ -154,10 +155,18 @@ const openProfilePopup = () => {
 const openPushPopup = () => {
   openPopup(popupAddCard)
 
+
 }
 
 
-buttonPlus.addEventListener('click', openPushPopup)
+buttonPlus.addEventListener('click', function () {
+  formAddCard.reset()
+  const inputList = Array.from(formAddCard.querySelectorAll(config.inputElement));
+  const buttonElement = formAddCard.querySelector(config.buttonElement)
+  toggleButtonState(inputList, buttonElement, config);
+  openPopup(popupAddCard)
+});
+
 
 
 const handleProfileFormSubmit =  (evt) => {
@@ -165,11 +174,21 @@ const handleProfileFormSubmit =  (evt) => {
     profileTitle.textContent = inputName.value;
     profileSubtitle.textContent = inputJob.value;
     closePopup(popupEdit)
-
 }
 
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
-buttonEdit.addEventListener('click', openProfilePopup)
+
+buttonEdit.addEventListener('click', () => {
+  const inputList = Array.from(formAddCard.querySelectorAll(config.inputElement));
+  const buttonElement = formAddCard.querySelector(config.buttonElement)
+  toggleButtonState(inputList, buttonElement, config);
+
+  openProfilePopup()
+  let eventInput = new Event('input');
+  inputName.dispatchEvent(eventInput);
+  inputJob.dispatchEvent(eventInput);
+})
+
 
 popupEditClose.addEventListener('click', () =>{
   closePopup(popupEdit)
@@ -182,13 +201,6 @@ popupAddCardClose.addEventListener('click', () =>{
 popupPhotoClose.addEventListener('click', () =>{
   closePopup(popupPhoto)
 })
-
-
-/* window.addEventListener('click', evt => {
-  console.log(evt.target)
-  console.log(evt.currentTarget)
-})
- */
 
 
 
