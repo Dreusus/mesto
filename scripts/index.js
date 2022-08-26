@@ -27,7 +27,7 @@ const formEditProfile = document.querySelector('#popEdit')
 const formAddCard = document.querySelector('#popAdd')
 
 //Темплейт
-const template = document.querySelector('#template').content
+const templateSelector = document.querySelector('#template').content
 const container = document.querySelector('.elements')
 
 //Валидация
@@ -47,7 +47,7 @@ popupAddCardValidation.enableValidation()
 
 //Создание карточки
 const createMesto = (cardName, link) => {
-  const card = new Card(cardName, link, template, openPopup)
+  const card = new Card(cardName, link, templateSelector, openPopup)
   return card.generateCard()
   }
 
