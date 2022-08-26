@@ -131,7 +131,7 @@ const handleProfileFormSubmit =  (evt) => {
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 
 buttonEdit.addEventListener('click', () => {
-  /* toggleButtonState(inputList, buttonElement, config); */
+  popupEditValidation.resetValidation()
   openProfilePopup()
   const eventInput = new Event('input');
   inputName.dispatchEvent(eventInput);
