@@ -48,7 +48,7 @@ popupAddCardValidation.enableValidation()
 //Создание карточки
 const createMesto = (cardName, link) => {
   const card = new Card(cardName, link, template, openPopup)
-  return card.getTemplate()
+  return card.generateCard()
   }
 
   const renderMesto = (newCard) => {
@@ -59,7 +59,6 @@ const createMesto = (cardName, link) => {
     evt.preventDefault();
     const newCard = createMesto(inputTitle.value,inputImage.value)
     container.prepend(newCard)
-    evt.target.reset()
     closePopup(popupAddCard)
   }
 
@@ -116,7 +115,7 @@ const openPushPopup = () => {
 
 buttonPlus.addEventListener('click', function () {
   formAddCard.reset()
-  /* toggleButtonState(inputList, buttonElement, config); */
+  popupAddCardValidation.resetValidation()
   openPopup(popupAddCard)
 });
 
