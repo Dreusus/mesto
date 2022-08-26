@@ -1,31 +1,5 @@
-
-const initialCards = [
-  {
-    name: 'Прометей',
-    link: 'http://pravdaurfo.ru/sites/default/files/home/user1530/23537886251.jpg'
-  },
-  {
-    name: 'Аэросъемка',
-    link: 'https://pilothub.ru/datas/folio/16287-aerosemka-goroda-nadym.jpg'
-  },
-  {
-    name: 'Церковь',
-    link: 'https://content.foto.my.mail.ru/mail/sasin62/1329/h-1351.jpg'
-  },
-  {
-    name: 'Кольцо',
-    link: 'https://fototerra.ru/photo/Russia/Nadym/large-256771.jpg'
-  },
-  {
-    name: 'Парк',
-    link: 'https://fototerra.ru/photo/Russia/Nadym/large-256766.jpg'
-  },
-  {
-    name: 'День оленевода',
-    link: 'https://a.d-cd.net/31497b5s-1920.jpg'
-  }
-];
-
+import Card from './Card.js'
+import FormValidator from './FormValidator.js';
 
 //Попап редактирование профиля
 const buttonEdit = document.querySelector('.profile__edit')
@@ -46,8 +20,6 @@ const inputImage = document.querySelector('#popup-img')
 
 //Попап картинка
 const popupPhoto = document.querySelector('.popup_photo')
-const imagePopupPhoto = document.querySelector('.popup__image')
-const subscriptionPopupPhoto = document.querySelector('.popup__subscription-photo')
 const popupPhotoClose = document.querySelector('#closePhoto')
 
 //Формы
@@ -58,8 +30,7 @@ const formAddCard = document.querySelector('#popAdd')
 const template = document.querySelector('#template').content
 const container = document.querySelector('.elements')
 
-//
-
+//Валидация
 const config = {
   formElement: '.popup__form',
   inputElement: '.popup__text',
@@ -67,55 +38,30 @@ const config = {
   inactiveButtonClass: 'popup__accept_invalid',
   inputErrorClass: 'popup__text_type_error',
 }
-const inputList = Array.from(formAddCard.querySelectorAll(config.inputElement));
-//При сабмите формы кнопка сабмита уже есть в объекте evt.Это evt.submitter. Поэтому ее можно не искать, а сразу использовать в коде обработчика сабмита  - добавить 
-const buttonElement = formAddCard.querySelector(config.buttonElement)
+
+const popupEditValidation = new FormValidator(config,popupEdit)
+const popupAddCardValidation = new FormValidator(config, popupAddCard)
+
+popupEditValidation.enableValidation()
+popupAddCardValidation.enableValidation()
 
 //Создание карточки
 const createMesto = (cardName, link) => {
-  const card = template.querySelector('.element').cloneNode(true)
-  const image = card.querySelector('.element__image')
-    card.querySelector('.element__title').textContent = cardName
-    image.src = link
-    image.alt = cardName
-    card.querySelector('.element__like').addEventListener('click', (event) =>{
-      const eventTarget=event.target
-      eventTarget.classList.toggle('element__like_active')
-      })
-   card.querySelector('.element__delete').addEventListener('click', () =>{
-    card.remove()
-  })
-  image.addEventListener('click', () => {
-    imagePopupPhoto.src = link
-    imagePopupPhoto.alt = cardName
-    subscriptionPopupPhoto.textContent = cardName
-    openPopupPhoto()
+  const card = new Card(cardName, link, template)
+  return card.getTemplate()
+  }
 
-  })
-  return card
-}
+  const renderMesto = (newCard) => {
+    container.prepend(newCard);
+  }
 
-
-const renderMesto = (newCard) => {
-  container.prepend(newCard);
-}
-
-const addCard = (evt) => {
-  evt.preventDefault();
-  const newCard = createMesto(inputTitle.value,inputImage.value)
-  container.prepend(newCard)
-  evt.target.reset()
-  closePopup(popupAddCard)
-
-
-}
-
-initialCards.forEach(item => {
-  const initialCard = createMesto(item.name, item.link)
-  renderMesto(initialCard);
-
-})
-
+  const addCard = (evt) => {
+    evt.preventDefault();
+    const newCard = createMesto(inputTitle.value,inputImage.value)
+    container.prepend(newCard)
+    evt.target.reset()
+    closePopup(popupAddCard)
+  }
 
 formAddCard.addEventListener('submit', addCard)
 
@@ -126,7 +72,6 @@ const openPopup = (popup) => {
   popup.classList.add('popup_opened')
   popup.addEventListener('click', closeOverlay)
   document.addEventListener('keyup', closeEscape)
-
 }
 
 //Закрытие попапа
@@ -165,14 +110,12 @@ const openProfilePopup = () => {
 // Добавление карточки
 const openPushPopup = () => {
   openPopup(popupAddCard)
-
-
 }
 
 
 buttonPlus.addEventListener('click', function () {
   formAddCard.reset()
-  toggleButtonState(inputList, buttonElement, config);
+  /* toggleButtonState(inputList, buttonElement, config); */
   openPopup(popupAddCard)
 });
 
@@ -188,7 +131,7 @@ const handleProfileFormSubmit =  (evt) => {
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 
 buttonEdit.addEventListener('click', () => {
-  toggleButtonState(inputList, buttonElement, config);
+  /* toggleButtonState(inputList, buttonElement, config); */
   openProfilePopup()
   const eventInput = new Event('input');
   inputName.dispatchEvent(eventInput);
@@ -209,6 +152,42 @@ popupPhotoClose.addEventListener('click', () =>{
 })
 
 
+
+
+
+//Массив карточек
+const initialCards = [
+  {
+    name: 'Прометей',
+    link: 'http://pravdaurfo.ru/sites/default/files/home/user1530/23537886251.jpg'
+  },
+  {
+    name: 'Аэросъемка',
+    link: 'https://pilothub.ru/datas/folio/16287-aerosemka-goroda-nadym.jpg'
+  },
+  {
+    name: 'Церковь',
+    link: 'https://content.foto.my.mail.ru/mail/sasin62/1329/h-1351.jpg'
+  },
+  {
+    name: 'Кольцо',
+    link: 'https://fototerra.ru/photo/Russia/Nadym/large-256771.jpg'
+  },
+  {
+    name: 'Парк',
+    link: 'https://fototerra.ru/photo/Russia/Nadym/large-256766.jpg'
+  },
+  {
+    name: 'День оленевода',
+    link: 'https://a.d-cd.net/31497b5s-1920.jpg'
+  }
+];
+//Создание первых карточек
+initialCards.forEach(item => {
+  const initialCard = createMesto(item.name, item.link)
+  renderMesto(initialCard);
+
+})
 
 
 
