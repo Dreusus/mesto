@@ -1,10 +1,10 @@
 export default class Card {
-  constructor(cardName, link, template) {
+  constructor(cardName, link, template, openPopup) {
   this._card =  template.querySelector('.element').cloneNode(true);
   this._image = this._card.querySelector('.element__image');
   this._name = cardName;
   this._link = link;
-
+  this._openPopup = openPopup;
 }
 
   _likeButton () {
@@ -21,42 +21,17 @@ export default class Card {
   }
 
 
-  _openImage () {
+  _openImage (openPopup) {
     const imagePopupPhoto = document.querySelector('.popup__image')
     const subscriptionPopupPhoto = document.querySelector('.popup__subscription-photo')
     const popupPhoto = document.querySelector('.popup_photo')
-
-    const openPopup = (popup) => {
-     popup.classList.add('popup_opened')
-     popup.addEventListener('click', closeOverlay)
-    document.addEventListener('keyup', closeEscape)
-    }
-
-    const closeEscape = (event) => {
-      if (event.key === 'Escape') {
-        const popup = document.querySelector('.popup_opened')
-        closePopup(popup)
-      }
-    }
-
-    const closeOverlay = (event) => {
-      if(event.target === event.currentTarget) {
-        closePopup(event.target)
-      }
-    }
-
-    const closePopup = (popup) => {
-      popup.classList.remove('popup_opened')
-      popup.removeEventListener('click', closeOverlay)
-      document.removeEventListener('keyup', closeEscape)
-    }
-
 
     this._image.addEventListener('click', () => {
       imagePopupPhoto.src = this._link;
       imagePopupPhoto.alt = this._name;
       subscriptionPopupPhoto.textContent = this._name;
-      openPopup(popupPhoto)
+      this._openPopup(popupPhoto)
+      console.log(this)
   })}
 
 

@@ -47,7 +47,7 @@ popupAddCardValidation.enableValidation()
 
 //Создание карточки
 const createMesto = (cardName, link) => {
-  const card = new Card(cardName, link, template)
+  const card = new Card(cardName, link, template, openPopup)
   return card.getTemplate()
   }
 
@@ -67,14 +67,15 @@ formAddCard.addEventListener('submit', addCard)
 
 
 
-//Открытие попапа
+
 const openPopup = (popup) => {
   popup.classList.add('popup_opened')
   popup.addEventListener('click', closeOverlay)
   document.addEventListener('keyup', closeEscape)
+
 }
 
-//Закрытие попапа
+
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened')
   popup.removeEventListener('click', closeOverlay)
