@@ -26,9 +26,20 @@ const popupPhotoClose = document.querySelector('#closePhoto')
 const formEditProfile = document.querySelector('#popEdit')
 const formAddCard = document.querySelector('#popAdd')
 
-//Темплейт
-const templateSelector = document.querySelector('#template').content
+//
 const container = document.querySelector('.elements')
+
+const selectors = {
+  template: '#template',
+  container: '.element',
+  image: '.element__image',
+  buttonDel: '.element__delete',
+  buttonLike: '.element__like',
+  imagePopupPhoto: '.popup__image',
+  popupPhoto: '.popup_photo',
+  subscriptionPopupPhoto: '.popup__subscription-photo'
+}
+
 
 //Валидация
 const config = {
@@ -47,7 +58,7 @@ popupAddCardValidation.enableValidation()
 
 //Создание карточки
 const createMesto = (cardName, link) => {
-  const card = new Card(cardName, link, templateSelector, openPopup)
+  const card = new Card(cardName, link, selectors , openPopup)
   return card.generateCard()
   }
 
@@ -133,9 +144,6 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 buttonEdit.addEventListener('click', () => {
   popupEditValidation.resetValidation()
   openProfilePopup()
-  const eventInput = new Event('input');
-  inputName.dispatchEvent(eventInput);
-  inputJob.dispatchEvent(eventInput);
 })
 
 
