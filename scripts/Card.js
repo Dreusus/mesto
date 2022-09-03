@@ -30,17 +30,13 @@ export default class Card {
     this._openPopup(document.querySelector(this._selectors.popupPhoto))
   }
 
-  _getTemplate() {
-    return this._card
-
-  }
 
   generateCard() {
-    this._element = this._getTemplate()
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
+
+    this._card.querySelector('.element__title').textContent = this._name;
+    this._card.querySelector('.element__image').src = this._link;
+    this._card.querySelector('.element__image').alt = this._name;
     this._setEventListeners()
-    return this._element;
+    return this._card;
   }
 }
