@@ -1,4 +1,4 @@
-.profile__subtitle {
+.profile__description {
   font-family: 'Inter', arial, helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width: 700px){
-.profile__subtitle {
+.profile__description  {
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
