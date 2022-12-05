@@ -29,7 +29,7 @@ const userInfo = new UserInfo( {       // Класс Инфа пользоват
 })
 
 const createNewCard = (item) => {      // Функция Создания новой карточки
-  const newCard = new Card(
+  const card = new Card(
     item.name,
     item.link,
     selectors,
@@ -37,27 +37,35 @@ const createNewCard = (item) => {      // Функция Создания нов
       popupWithImage.open(item.name, item.link)
       }
     )
-    const newCardElement = newCard.generateCard()
-    const addCardToPage = new Section( {}, containerSelector)
-    addCardToPage.addItemPrepend(newCardElement)
+
+return card.generateCard()
 }
 
-const defaultCard = new Section (       //Отрисовка дефолтных карточек
+const cardList = new Section (
   {items: initialCards,
-  renderer: (item) => createNewCard(item)
+  renderer: (item) => {
+    const card = createNewCard( {
+      name: item.name,
+      link: item.link,
+    })
+    cardList.addItem(card)
+  }
 }, containerSelector)
-defaultCard.renderItems()
+
+cardList.renderItems()
 
 const popupWithImage = new PopupWithImage(selectors.popupPhoto);  //Класс открывает попап с картинкой
 popupWithImage.setEventListeners()
 
 const addImageCard = new PopupWithForm (  //Класс открывает попап "Новое место"
   '.popup-add',
-  () => {
-    createNewCard( {
-      name: inputTitle.value,
-       link: inputImage.value
+  (item) => {
+
+    const card = createNewCard( {
+      name: item['profile-mesto'],
+       link: item['profile-img']
       })
+      cardList.addItemPrepend(card)
        addImageCard.close()
   }
 )
@@ -70,20 +78,26 @@ addImageCard.setEventListeners()
 
 const formProfile = new PopupWithForm(  //Класс открывает попап "Редактировать профиль"
   '.popup-edit',
-  () => {
-    userInfo.setUserInfo(inputName.value,inputDescription.value)
+  (item) => {
+    userInfo.setUserInfo(item['profile-name'],item['profile-about'])
     formProfile.close()
   }
 )
+
+
 formProfile.setEventListeners()  //Слушатели для попапа: 1)закрытие esc+overlay 2)Получение значений инпутов и установка их в h1,p с главной страницы
 
-buttonEdit.addEventListener('click', () => {  //Открытие попапа "редактировать профиль" + валидация по клику
-  const user = userInfo.getUserInfo()   //Получение значений инфы пользователя
-  inputName.value = user.userName;   //Перезапись значений
+buttonEdit.addEventListener('click', () => {
+  const user = userInfo.getUserInfo()
+
+  inputName.value = user.userName;
   inputDescription.value = user.userDescription;
   popupEditValidation.resetValidation()
   formProfile.open();
 })
+
+
+
 
 
 
