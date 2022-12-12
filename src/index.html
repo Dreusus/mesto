@@ -8,28 +8,35 @@
 <body class="body">
   <div class="page">
     <header class="header">
-      <img src="<%=require('/src/images/header__logo.svg')%>" alt="Логотип Место" class="header__logo">
+      <img  src="<%=require('/src/images/header__logo.svg')%>"
+            alt="Логотип Место"
+            class="header__logo">
+     </header>
 
-    </header>
-    <main class="content">
+  <main class="content">
 
-      <section class="profile">
-        <img src="<%=require('/src/images/profile__avatar.jpg')%>" alt="Аватар профиля" class="profile__avatar">
-        <div class="profile__info">
-          <div class="profile__column-up">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__edit"></button>
-          </div>
-          <p class="profile__description">Исследователь океана</p>
+    <section class="profile">
+      <div class="avatar">
+        <button  type="button" class="profile__avatar-button">
+          <img  src="<%=require('/src/images/profile__avatar.jpg')%>"
+                alt="Аватар профиля"
+                class="profile__avatar">
+        </button>
+      </div>
+
+      <div class="profile__info">
+        <div class="profile__column-up">
+          <h1 class="profile__name"></h1>
+          <button type="button" class="profile__edit"></button>
         </div>
-        <button type="button" class="profile__button"></button>
-      </section>
+        <p class="profile__description"></p>
+      </div>
+      <button type="button" class="profile__button"></button>
+    </section>
 
-      <section class="elements">
-      </section>
-
-
-    </main>
+    <section class="elements">
+    </section>
+  </main>
 
     <footer class="footer">
       <p class="footer__copyright">
@@ -92,10 +99,38 @@
       </div>
     </section>
 
+    <section class = "popup popup-delete">
+      <div class="popup__container">
+        <button  type="button" class="popup__close"></button>
+        <form class="popup__form" id="popSure" novalidate>
+         <h2 class="popup__title">Вы уверены?</h2>
+         <button type="submit" class="popup__accept">Да</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup popup-avatar" id="avatar-popup">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form id="popAvatar" class="popup__form" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <input  type="url"
+                class="popup__text"
+                id="popup-avatar"
+                name="popup-avatar"
+                placeholder="Ссылка на картинку"
+                required>
+        <span class="popup__error popup-avatar-error"></span>
+        <button  type="submit" class="popup__accept">Сохранить</button>
+       </form>
+      </div>
+    </section>
 
     <section class="popup popup_photo">
       <div class="popup__container popup__container_photo">
-        <button class="popup__close" type="button" id="closePhoto"></button>
+        <button class="popup__close"
+                type="button"
+                id="closePhoto"></button>
          <img src="#" alt="фото" class="popup__image">
          <h2 class="popup__subscription-photo"></h2>
 
@@ -108,7 +143,10 @@
         <button type="button" class="element__delete"></button>
         <div class="element__subscription">
           <h2 class="element__title"></h2>
-          <button type="button" class="element__like"></button>
+            <div class="element__group-like">
+              <button type="button" class="element__like"></button>
+              <span class="element__like-count"></span>
+            </div>
         </div>
       </article>
     </template>

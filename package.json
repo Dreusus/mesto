@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && webpack --mode production",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",
     "cssnano": "^5.1.14",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.2",
     "postcss": "^8.4.19",

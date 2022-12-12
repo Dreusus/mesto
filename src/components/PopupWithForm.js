@@ -1,4 +1,4 @@
-import Popup from './Popup.js';
+ import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
 constructor (popupSelector,handleSubmitForm) {
@@ -16,7 +16,6 @@ _getInputValues(){
   this._inputList.forEach( (input) => {
     this._inputValues[input.name] = input.value
   })
-
   return this._inputValues
 }
 
@@ -31,6 +30,20 @@ setEventListeners() {
 close(){
   this._formElement.reset();
   super.close();
+}
+
+changeSumitHandler(newSubmitHandler) {
+  this._handleSubmitForm = newSubmitHandler;
+}
+
+loadingMessage( isLoad ) {
+
+if (isLoad) {
+  this._button.textContent = 'Сохранение...'
+} else {
+ this._button.textContent = `${this._button.textContent.slice(0,6)}ить`
+ 
+}
 }
 
 }
