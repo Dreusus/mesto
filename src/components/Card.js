@@ -21,6 +21,7 @@ export default class Card {
     this._cardImage = this._element.querySelector(this._selectors.image)
     this._cardLike = this._element.querySelector(this._selectors.buttonLike)
     this._cardDelete = this._element.querySelector(this._selectors.buttonDel)
+    this._countLikeElement = this._element.querySelector(this._selectors.counterlike)
     this._cardImage.addEventListener('click', () => this._handleCardClick())
     this._cardLike.addEventListener('click', () => this._handleLikeClick(this._id))
     this._cardDelete.addEventListener('click', () => this._handleDeleteClick(this._id))
@@ -41,7 +42,6 @@ export default class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes;
-    this._countLikeElement = this._element.querySelector('.element__like-count')
     this._countLikeElement.textContent = this._likes.length
 
     if(this.isLiked()) {
@@ -51,7 +51,7 @@ export default class Card {
   }
   }
 
-  _deleteButton () {
+  deleteButton () {
   this._element.remove()
   }
 

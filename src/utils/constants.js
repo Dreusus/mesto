@@ -33,7 +33,8 @@ export const selectors = {
   buttonLike: '.element__like',
   imagePopupPhoto: '.popup__image',
   popupPhoto: '.popup_photo',
-  subscriptionPopupPhoto: '.popup__subscription-photo'
+  subscriptionPopupPhoto: '.popup__subscription-photo',
+  counterlike: '.element__like-count'
 }
 
 export const config = {
