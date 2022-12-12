@@ -1,9 +1,9 @@
 .profile__avatar-button {
   background-image: url(../../../images/pencilAvatar.png);
-  background-position: center ;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: #000;
-  background-size: 26px 26px ;
+  background-size: 26px 26px;
   padding: 0;
   margin: 0;
   width: 120px;
@@ -11,7 +11,7 @@
   outline: none;
   border: none;
   border-radius: 50%;
-  
+
 }
 .profile__avatar-button:hover  .profile__avatar {
   opacity: .2;
