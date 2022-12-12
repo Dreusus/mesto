@@ -154,9 +154,11 @@ const popupProfile = new PopupWithForm(  //Попап "Редактироват�
     popupProfile.loadingMessage(true)
     api.editProfile(item['profile-name'], item['profile-about'])
       .then(res => {
+
         userInfo.setUserInfo({
           userName: res.name,
           userDescription: res.about,
+          userAvatar: res.avatar
         })
         popupProfile.close()
       })
@@ -177,7 +179,9 @@ const popupAvatar = new PopupWithForm(  //Попап "Обновить ават�
     api.editAvatar(item['popup-avatar'])
       .then(res => {
         userInfo.setUserInfo({
-          userAvatar: res.avatar
+          userAvatar: res.avatar,
+          userName: res.name,
+          userDescription: res.about
         })
         popupAvatar.close()
       })
