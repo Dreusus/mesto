@@ -40,11 +40,8 @@ let userId
 
 Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cards]) => {
-    userInfo.setUserInfo({
-      userName: userData.name,
-      userDescription: userData.about,
-      userAvatar: userData.avatar
-    })
+    console.log(userData)
+    userInfo.setUserInfo(userData)
     userId = userData._id
     cardList.renderItems(cards)
   })
@@ -154,12 +151,7 @@ const popupProfile = new PopupWithForm(  //Попап "Редактироват�
     popupProfile.loadingMessage(true)
     api.editProfile(item['profile-name'], item['profile-about'])
       .then(res => {
-
-        userInfo.setUserInfo({
-          userName: res.name,
-          userDescription: res.about,
-          userAvatar: res.avatar
-        })
+        userInfo.setUserInfo(res)
         popupProfile.close()
       })
       .catch((err) => {
@@ -178,11 +170,7 @@ const popupAvatar = new PopupWithForm(  //Попап "Обновить ават�
     popupAvatar.loadingMessage(true)
     api.editAvatar(item['popup-avatar'])
       .then(res => {
-        userInfo.setUserInfo({
-          userAvatar: res.avatar,
-          userName: res.name,
-          userDescription: res.about
-        })
+        userInfo.setUserInfo(res)
         popupAvatar.close()
       })
       .catch((err) => {
@@ -217,8 +205,6 @@ buttonEdit.addEventListener('click', () => { //Открытие попапа "Р
 })
 
 buttonAvatar.addEventListener('click', () => {  //Открытие попапа "Обновить аватар" , вставление данных с инфы пользователя в инпут попапа
-  const user = userInfo.getUserInfo()
-  inputAvatar.value = user.userAvatar
   popupAvatar.open()
   popupAvatarValidation.resetValidation()
 })
